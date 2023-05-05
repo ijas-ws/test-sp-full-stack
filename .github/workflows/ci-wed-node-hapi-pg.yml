@@ -2,15 +2,13 @@ name: CI wed-node-hapi-pg
 on:
   push:
     branches:
-      - master
       - develop
       - qa
+      - master
     paths: "wed-node-hapi-pg/**"
-
   pull_request:
     paths: "wed-node-hapi-pg/**"
 
-  # Allows to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
@@ -25,7 +23,7 @@ jobs:
         node-version: [16.14.x]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
@@ -43,4 +41,4 @@ jobs:
         run: yarn build:dev
 
       - name: Test
-        run: yarn run test
+        run: yarn test

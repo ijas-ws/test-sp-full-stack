@@ -1,6 +1,4 @@
-# CD pipeline for wed-node-hapi-pg for development branch
-
-name: CD wed-node-hapi-pg - development
+# CD pipeline for wed-node-hapi-pg
 
 on:
   push:
@@ -10,14 +8,14 @@ on:
       - master
     paths: "wed-node-hapi-pg/**"
 
-    workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   docker-build-and-push:
     name: Docker build image and push
     runs-on: ubuntu-latest
     defaults:
-      run: 
+      run:
         working-directory: ./wed-node-hapi-pg
     strategy:
       matrix:
@@ -41,11 +39,11 @@ jobs:
         id: environment
         run: |
           if [[ ${{ steps.vars.outputs.short_ref }} == master ]]; then
-               echo ::set-output name=environment_name::production
+              echo ::set-output name=environment_name::production
           elif [[ ${{ steps.vars.outputs.short_ref }} == qa ]]; then
-               echo ::set-output name=environment_name::qa
-          else
-               echo ::set-output name=environment_name::development
+              echo ::set-output name=environment_name::qa
+          else 
+              echo ::set-output name=environment_name::development
           fi
 
       # Configure AWS with credentials
@@ -69,13 +67,14 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           IMAGE_TAG: ${{ github.sha }}
           DOCKER_BUILDKIT: 1
+
         run: |
           docker build --no-cache -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG . --build-arg ENVIRONMENT_NAME=${{ steps.environment.outputs.environment_name }}
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
       # Create and configure Amazon ECS task definition
       - name: Render Amazon ECS task definition
-        id: wed-container
+        id: task
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: wed-node-hapi-pg/task-definition-${{ steps.vars.outputs.short_ref }}.json
@@ -86,7 +85,7 @@ jobs:
       - name: Deploy to Amazon ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
-          task-definition: ${{ steps.wed-container.outputs.task-definition }}
+          task-definition: ${{ steps.task.outputs.task-definition }}
           service: wed-service-${{ steps.vars.outputs.short_ref }}
           cluster: wed-cluster-${{ steps.vars.outputs.short_ref }}
 
