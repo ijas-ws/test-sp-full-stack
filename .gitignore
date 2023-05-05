@@ -1,0 +1,7 @@
+node_modules/
+wed-next-js-web/node_modules/
+wed-node-hapi-pg/node_modules/
+cdk.context.json
+.sst/
+build
+out
