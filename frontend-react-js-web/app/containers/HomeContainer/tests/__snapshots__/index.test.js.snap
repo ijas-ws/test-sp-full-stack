@@ -29,7 +29,7 @@ exports[`<HomeContainer /> tests should render and match the snapshot 1`] = `
             <span
               class="MuiTypography-root MuiTypography-h5 MuiCardHeader-title css-1qvr50w-MuiTypography-root"
             >
-              Repository Search
+              Repository Search Below..
             </span>
           </div>
         </div>
