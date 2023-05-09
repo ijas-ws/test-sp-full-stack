@@ -1,0 +1,12 @@
+version: '3'
+services:
+  # Setup frontend-react-js-web web
+  frontend-react-js-web:
+    build:
+      context: './frontend-react-js-web'
+    ports:
+      - 3000:3000
+    env_file:
+      - ./frontend-react-js-web/.env.docker
+
+

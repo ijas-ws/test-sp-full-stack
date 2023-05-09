@@ -1,6 +1,5 @@
 import dotenv from "dotenv";
-import { WedNextJsWeb } from "./stacks/WedNextJsWeb";
-import { WedNodeHapiPg } from "./stacks/WedNodeHapiPg";
+import { FrontendReactJsWeb } from "./stacks/FrontendReactJsWeb";
 
 dotenv.config({ path: ".env" });
 
@@ -13,6 +12,6 @@ export default {
 	},
 	stacks(app) {
 		// deploy stacks
-		app.stack(WedNextJsWeb).stack(WedNodeHapiPg);
+		app.stack(FrontendReactJsWeb);
 	},
 };
