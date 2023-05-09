@@ -1,5 +1,7 @@
-# Don't check auto-generated stuff into git
-build
 node_modules
+frontend-react-js-web/node_modules
 .sst
+outputs.json
 cdk.context.json
+build
+out
