@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { FrontendReactJsWeb } from "./stacks/FrontendReactJsWeb";
+import { BackendNodeGraphqlMysql } from "./stacks/BackendNodeGraphqlMysql";
 
 dotenv.config({ path: ".env" });
 
@@ -12,6 +12,6 @@ export default {
 	},
 	stacks(app) {
 		// deploy stacks
-		app.stack(FrontendReactJsWeb);
+		app.stack(BackendNodeGraphqlMysql);
 	},
 };

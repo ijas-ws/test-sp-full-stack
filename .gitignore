@@ -1,5 +1,5 @@
 node_modules
-frontend-react-js-web/node_modules
+backend-node-graphql-mysql/node_modules
 .sst
 outputs.json
 cdk.context.json

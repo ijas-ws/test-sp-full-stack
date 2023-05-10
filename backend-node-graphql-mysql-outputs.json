@@ -1,0 +1,27 @@
+{
+	"dev": {
+    "image": "511522223657.dkr.ecr.ap-south-1.amazonaws.com/cdk-hnb659fds-container-assets-511522223657-ap-south-1:3beaa8b6684aa0d1d8953187a0f33824ec9019aa99e62045f7451a10b04f3c6f",
+    "family": "backend-task-definition-dev",
+    "taskRole": "arn:aws:iam::511522223657:role/backend-task-role-dev",
+    "executionRole": "arn:aws:iam::511522223657:role/backend-ecs-execution-role-dev",
+    "databaseName": "backend_database_dev",
+    "databaseHost": "dev-web-app-backendnodegr-backenddatabaseinstanced-uor9ofd03odj.cvnyo3tm4lck.ap-south-1.rds.amazonaws.com",
+		"redisHost": "backend-redis-cluster-dev.9txi6w.0001.aps1.cache.amazonaws.com",
+    "awsRegion": "ap-south-1",
+    "secretName": "backend-database-credentials-dev",
+    "secretArn": "arn:aws:secretsmanager:ap-south-1:511522223657:secret:backend-database-credentials-dev-lrelIm",
+    "loadBalancerDns": "backend-elb-dev-1485414529.ap-south-1.elb.amazonaws.com",
+    "serviceName": "backend-service-dev",
+    "containerPort": "9000",
+    "containerName": "backend-container-dev",
+    "clusterName": "backend-cluster-dev",
+    "taskDefinition": "arn:aws:ecs:ap-south-1:511522223657:task-definition/backend-task-definition-dev:1",
+    "elasticContainerRegistryRepo": "cdk-hnb659fds-container-assets-511522223657-ap-south-1",
+    "logDriver": "awslogs",
+		"logDriverOptions": {
+      "awslogs-group": "dev-web-app-BackendNodeGraphqlMysql-backendtaskdevbackendcontainerdevLogGroupF28C8AC8-VNHaMudbxQnH",
+      "awslogs-stream-prefix": "backend-log-group-dev",
+      "awslogs-region": "ap-south-1"
+    }
+	}
+}
