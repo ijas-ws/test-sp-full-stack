@@ -1,0 +1,11 @@
+CREATE TABLE products (
+	id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+	name VARCHAR(255) NOT NULL,
+	category VARCHAR(255) NOT NULL,
+	amount BIGINT NOT NULL,
+	created_at DATETIME DEFAULT NOW(),
+	updated_at DATETIME NULL on UPDATE NOW(),
+	deleted_at DATETIME,
+	INDEX(name),
+	INDEX(category)
+);
