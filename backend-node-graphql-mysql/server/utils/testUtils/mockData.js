@@ -63,7 +63,12 @@ export const supplierProductsTable = range(1, 10).map((_, index) => ({
 }));
 
 export const DB_ENV = {
-  DB_URI: 'postgres://reporting_dashboard_role:reportingdashboard123@localhost:5432/reporting_dashboard_dev',
+  // DB_URI: 'postgres://reporting_dashboard_role:reportingdashboard123@localhost:5432/reporting_dashboard_dev',
+  DB_URI:
+    process.env.DB_URI ||
+    `mysql://${process.env.MYSQL_USER}:${process.env.MYSQL_PASSWORD}@${process.env.MYSQL_HOST}/${
+      process.env.MYSQL_DATABASE
+    }`,
   POSTGRES_HOST: 'host',
   POSTGRES_USER: 'user',
   POSTGRES_PASSWORD: 'password',
