@@ -68,7 +68,7 @@ export const init = async () => {
   });
 
   app.get('/', (req, res) => {
-    const message = 'Service is on AIR!';
+    const message = 'Service Picker is running...!';
     sendMessage(message);
     logger().info(message);
     res.json({ data: message });
