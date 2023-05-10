@@ -78,7 +78,7 @@ jobs:
         id: backend-container
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
-          task-definition: backend-node-graphql-mysql/task-definition-${{ steps.environment.outputs.environment_name }}.json
+          task-definition: backend-node-graphql-mysql/task-definition-${{ steps.vars.outputs.short_ref }}.json
           container-name: backend-container-${{ steps.environment.outputs.environment_name }}
           image: ${{ steps.login-ecr.outputs.registry }}/${{ secrets.AWS_ECR_REPOSITORY }}:${{ github.sha }}
 
