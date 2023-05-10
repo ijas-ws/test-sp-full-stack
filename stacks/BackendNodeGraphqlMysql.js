@@ -283,6 +283,7 @@ export function BackendNodeGraphqlMysql({ stack }) {
         DB_URI: dbURI,
         MYSQL_HOST: database.dbInstanceEndpointAddress,
         REDIS_HOST: redisCache.attrRedisEndpointAddress,
+        REDIS_PORT: "6379",
       },
       logging: ecs.LogDriver.awsLogs({
         streamPrefix: `${clientName}-log-group-${environment}`,

@@ -1,17 +1,17 @@
 {
   "taskRoleArn": "arn:aws:iam::511522223657:role/backend-task-role-dev",
   "executionRoleArn": "arn:aws:iam::511522223657:role/backend-ecs-execution-role-dev",
-  "taskDefinitionArn": "arn:aws:ecs:ap-south-1:511522223657:task-definition/backend-task-definition-dev:1",
+  "taskDefinitionArn": "arn:aws:ecs:ap-south-1:511522223657:task-definition/backend-task-definition-dev:4",
   "family": "backend-task-definition-dev",
   "containerDefinitions": [
     {
       "name": "backend-container-dev",
-      "image": "511522223657.dkr.ecr.ap-south-1.amazonaws.com/cdk-hnb659fds-container-assets-511522223657-ap-south-1:3beaa8b6684aa0d1d8953187a0f33824ec9019aa99e62045f7451a10b04f3c6f",
+      "image": "511522223657.dkr.ecr.ap-south-1.amazonaws.com/cdk-hnb659fds-container-assets-511522223657-ap-south-1:cbe799f5955c9abcddab4701f15d6a4a8530351d9abab4f27467a8fa767371d3",
       "logConfiguration": {
         "logDriver": "awslogs",
         "secretOptions": null,
         "options": {
-          "awslogs-group": "dev-web-app-BackendNodeGraphqlMysql-backendtaskdevbackendcontainerdevLogGroupF28C8AC8-VNHaMudbxQnH",
+          "awslogs-group": "dev-web-app-BackendNodeGraphqlMysql-backendtaskdevbackendcontainerdevLogGroupF28C8AC8-8SPCGOHKu25U",
           "awslogs-stream-prefix": "backend-log-group-dev",
           "awslogs-region": "ap-south-1"
         }
@@ -36,7 +36,7 @@
       "secrets": [
         {
           "name": "MYSQL_PASSWORD",
-          "valueFrom": "arn:aws:secretsmanager:ap-south-1:511522223657:secret:backend-database-credentials-dev-lrelIm:password::"
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:511522223657:secret:backend-database-credentials-dev-DRBor2:password::"
         }
       ],
       "cpu": 0,
