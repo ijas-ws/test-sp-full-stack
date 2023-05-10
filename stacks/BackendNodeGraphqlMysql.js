@@ -280,6 +280,7 @@ export function BackendNodeGraphqlMysql({ stack }) {
       memoryLimitMiB: 1024,
       environment: {
         BUILD_NAME: environment,
+        ENVIRONMENT_NAME: "development",
         DB_URI: dbURI,
         MYSQL_HOST: database.dbInstanceEndpointAddress,
         REDIS_HOST: redisCache.attrRedisEndpointAddress,
