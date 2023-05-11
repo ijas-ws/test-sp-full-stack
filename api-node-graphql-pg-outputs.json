@@ -1,0 +1,27 @@
+{
+	"dev": {
+    "image": "511522223657.dkr.ecr.ap-south-1.amazonaws.com/cdk-hnb659fds-container-assets-511522223657-ap-south-1:b3e02079d2fad7edb53fc7f6c32864eafc405172ae9a8051334e0401a261b77d",
+    "family": "api-task-definition-dev",
+    "taskRole": "arn:aws:iam::511522223657:role/api-task-role-dev",
+    "executionRole": "arn:aws:iam::511522223657:role/api-ecs-execution-role-dev",
+    "databaseName": "api_database_dev",
+    "databaseHost": "dev-web-app-apinodegraphq-apidatabaseinstancedeve8-piyelfjdn024.cvnyo3tm4lck.ap-south-1.rds.amazonaws.com",
+		"redisHost": "api-redis-cluster-dev.9txi6w.0001.aps1.cache.amazonaws.com",
+    "awsRegion": "ap-south-1",
+    "secretName": "api-database-credentials-dev",
+    "secretArn": "arn:aws:secretsmanager:ap-south-1:511522223657:secret:api-database-credentials-dev-o6wVdc",
+    "loadBalancerDns": "api-elb-dev-1756326291.ap-south-1.elb.amazonaws.com",
+    "serviceName": "api-service-dev",
+    "containerPort": "9000",
+    "containerName": "api-container-dev",
+    "clusterName": "api-cluster-dev",
+    "taskDefinition": "arn:aws:ecs:ap-south-1:511522223657:task-definition/api-task-definition-dev:3",
+    "elasticContainerRegistryRepo": "cdk-hnb659fds-container-assets-511522223657-ap-south-1",
+    "logDriver": "awslogs",
+		"logDriverOptions": {
+      "awslogs-group": "dev-web-app-ApiNodeGraphqlPg-apitaskdevapicontainerdevLogGroup8EB7B7FD-Cq8HHRgrzZmy",
+      "awslogs-stream-prefix": "api-log-group-dev",
+      "awslogs-region": "ap-south-1"
+    }
+	}
+}

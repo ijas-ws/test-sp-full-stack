@@ -1,0 +1,93 @@
+# CD pipeline for api-node-graphql-pg for development branch
+
+name: CD api-node-graphql-pg - development
+
+on:
+  push:
+    branches:
+      - develop
+      - qa
+      - master
+    # paths: "api-node-graphql-pg/**"
+  workflow_dispatch:
+
+jobs:
+  docker-build-and-push:
+    name: Docker build image and push
+    runs-on: ubuntu-latest
+    defaults:
+      run: 
+        working-directory: ./api-node-graphql-pg
+    strategy:
+      matrix:
+        node-version: [16.14.x]
+
+    steps:
+      # Checkout
+      - name: Checkout to branch
+        uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Get branch name
+        id: vars
+        run: echo ::set-output name=short_ref::${GITHUB_REF_NAME}
+
+      - name: Set env.ENV_NAME and env.BUILD_NAME
+        run: |
+          if [[ ${{ steps.vars.outputs.short_ref }} == master ]]; then
+              echo "BUILD_NAME=prod" >> "$GITHUB_ENV"
+          else
+              echo "ENV_NAME=.development" >> "$GITHUB_ENV"
+              echo "BUILD_NAME=dev" >> "$GITHUB_ENV"
+          fi
+
+      # Configure AWS with credentials
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # Login to Amazon ECR
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      # Build, tag, and push image to Amazon ECR
+      - name: Build, tag, and push image to ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ secrets.AWS_ECR_REPOSITORY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          IMAGE_TAG: ${{ github.sha }}
+          DOCKER_BUILDKIT: 1
+        run: |
+          docker build --no-cache -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG . --build-arg BUILD_NAME=${{ env.BUILD_NAME }} --build-arg ENVIRONMENT_NAME=${{ env.ENV_NAME }}
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+      # Create and configure Amazon ECS task definition
+      - name: Render Amazon ECS task definition
+        id: api-container
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: api-node-graphql-pg/task-definition-${{ env.BUILD_NAME }}.json
+          container-name: api-container-${{ env.BUILD_NAME }}
+          image: ${{ steps.login-ecr.outputs.registry }}/${{ secrets.AWS_ECR_REPOSITORY }}:${{ github.sha }}
+
+      # Deploy to Amazon ECS
+      - name: Deploy to Amazon ECS
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.api-container.outputs.task-definition }}
+          service: api-service-${{ env.BUILD_NAME }}
+          cluster: api-cluster-${{ env.BUILD_NAME }}
+
+      # Logout of Amazon
+      - name: Logout of Amazon ECR
+        if: always()
+        run: docker logout ${{ steps.login-ecr.outputs.registry }}
