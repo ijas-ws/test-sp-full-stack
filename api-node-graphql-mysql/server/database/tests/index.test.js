@@ -1,7 +1,7 @@
 import SequelizeMock from 'sequelize-mock';
-import pg from 'pg';
+import mysql2 from 'mysql2';
 import { resetAndMockDB } from '@utils/testUtils';
-import { DB_ENV } from '@utils/testUtils/mockData';
+import { DB_ENV } from '@server/utils/testUtils/dbConfig';
 
 const mocks = {};
 describe('getClient', () => {
@@ -21,9 +21,9 @@ describe('getClient', () => {
     expect(mocks.sequelize.mock.calls[0][0]).toEqual(DB_ENV.DB_URI);
     expect(mocks.sequelize.mock.calls[0][1]).toEqual({
       url: DB_ENV.DB_URI,
-      host: DB_ENV.POSTGRES_HOST,
-      dialectModule: pg,
-      dialect: 'postgres',
+      host: DB_ENV.MYSQL_HOST,
+      dialectModule: mysql2,
+      dialect: 'mysql',
       logging: false,
       pool: {
         min: 0,

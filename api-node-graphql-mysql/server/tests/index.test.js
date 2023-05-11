@@ -62,7 +62,7 @@ describe('health check API', () => {
     const app = require('../index').app;
     const res = await restfulGetResponse('/', app);
     expect(res.statusCode).toBe(200);
-    expect(res.body).toStrictEqual({ data: 'Service Picker is on AIR...!' });
+    expect(res.body).toStrictEqual({ data: 'Service up and running by SP!' });
   });
 });
 
