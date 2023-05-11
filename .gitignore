@@ -1,5 +1,6 @@
 node_modules
-api-node-graphql-pg/node_modules
+fe-next-js-web/node_modules
+be-node-hapi-pg/node_modules
 .sst
 outputs.json
 cdk.context.json
