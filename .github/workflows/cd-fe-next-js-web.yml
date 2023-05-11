@@ -6,6 +6,7 @@ on:
       - develop
       - qa
     # paths: "fe-next-js-web/**"
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -60,7 +61,7 @@ jobs:
         with:
           args: --follow-symlinks --delete
         env:
-          AWS_S3_BUCKET: fe-next-js-web-${{ steps.vars.outputs.short_env }}
+          AWS_S3_BUCKET: fe-next-js-web-${{ steps.environment.outputs.short_env }}
 
       - name: Invalidate CloudFront
         uses: chetan/invalidate-cloudfront-action@v2.4
