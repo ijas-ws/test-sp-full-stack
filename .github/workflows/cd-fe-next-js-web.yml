@@ -60,7 +60,7 @@ jobs:
         with:
           args: --follow-symlinks --delete
         env:
-          AWS_S3_BUCKET: fe-next-js-web-${{ steps.vars.outputs.short_ref }}
+          AWS_S3_BUCKET: fe-next-js-web-${{ steps.vars.outputs.short_env }}
 
       - name: Invalidate CloudFront
         uses: chetan/invalidate-cloudfront-action@v2.4
