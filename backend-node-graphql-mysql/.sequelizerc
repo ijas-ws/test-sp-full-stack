@@ -1,5 +1,0 @@
-const path = require('path');
-require('./server/utils/configureEnv')();
-module.exports = {
-  'config': path.resolve('./config', 'db.js')
-}

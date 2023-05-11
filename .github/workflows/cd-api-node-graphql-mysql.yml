@@ -16,7 +16,7 @@ jobs:
     name: Docker build image and push
     runs-on: ubuntu-latest
     defaults:
-      run:
+      run: 
         working-directory: ./api-node-graphql-mysql
     strategy:
       matrix:
@@ -39,10 +39,10 @@ jobs:
       - name: Set env.ENV_NAME and env.BUILD_NAME
         run: |
           if [[ ${{ steps.vars.outputs.short_ref }} == master ]]; then
-              echo "BUILD_NAME=prod" >> $GITHUB_ENV
+              echo "BUILD_NAME=prod" >> "$GITHUB_ENV"
           else
               echo "ENV_NAME=.development" >> "$GITHUB_ENV"
-              echo "BUILD_NAME=dev" >> $GITHUB_ENV
+              echo "BUILD_NAME=dev" >> "$GITHUB_ENV"
           fi
 
       # Configure AWS with credentials
