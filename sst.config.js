@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
-import { ApiNodeGraphqlPg } from "./stacks/ApiNodeGraphqlPg";
+import { FeNextJsWeb } from "./stacks/FeNextJsWeb";
+import { BeNodeHapiPg } from "./stacks/BeNodeHapiPg";
 
 dotenv.config({ path: ".env" });
 
@@ -12,6 +13,6 @@ export default {
 	},
 	stacks(app) {
 		// deploy stacks
-		app.stack(ApiNodeGraphqlPg);
+		app.stack(FeNextJsWeb).stack(BeNodeHapiPg);
 	},
 };
