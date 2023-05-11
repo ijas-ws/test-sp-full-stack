@@ -1,0 +1,29 @@
+version: '3'
+services:
+  api_node_graphql_mysql_db:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    restart: always
+    env_file:
+      - .env.docker
+
+  redis:
+    image: 'redis:6-alpine'
+    ports:
+      - 6379:6379
+    command: ['redis-server', '--bind', 'redis', '--port', '6379']
+
+  app:
+    build:
+      context: .
+      args:
+        ENVIRONMENT_NAME: docker
+    depends_on:
+      - redis
+      - api_node_graphql_mysql_db
+    restart: always
+    ports:
+      - 9000:9000
+    env_file:
+      - .env.docker

@@ -1,0 +1,11 @@
+CREATE TABLE users (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	first_name VARCHAR(255) NOT NULL,
+	last_name VARCHAR(255) NOT NULL,
+	email VARCHAR(255) NOT NULL UNIQUE,
+	password VARCHAR(255) NOT NULL,
+	created_at DATETIME DEFAULT NOW(),
+	updated_at DATETIME NULL on UPDATE NOW(),
+	deleted_at DATETIME,
+	INDEX(email)
+);
