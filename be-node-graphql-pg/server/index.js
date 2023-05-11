@@ -68,7 +68,7 @@ export const init = async () => {
   });
 
   app.get('/', (req, res) => {
-    const message = 'Service up and running by SP!';
+    const message = 'Service is on AIR!';
     sendMessage(message);
     logger().info(message);
     res.json({ data: message });
