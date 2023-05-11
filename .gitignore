@@ -1,0 +1,7 @@
+node_modules
+api-node-graphql-mysql/node_modules
+.sst
+outputs.json
+cdk.context.json
+build
+out
